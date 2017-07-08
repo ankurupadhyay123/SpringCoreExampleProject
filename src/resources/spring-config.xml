@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Question 1-->
+    <bean name="database" class="main.Database">
+        <property name="port" value="8080"/>
+        <property name="name" value="mysql"/>
+    </bean>
+
+    <!--Question 3-->
+    <bean name="tea" class="main.Tea">
+    </bean>
+    <bean name="expresstea" class="main.ExpressTea">
+    </bean>
+
+    <!--Question 4 & 7-->
+    <bean name="teaRestaurant" class="main.Restaurant" scope="prototype">
+        <property name="hotDrink" ref="tea"/>
+    </bean>
+
+    <!--Question 4-->
+    <bean name="restaurant2" class="main.Restaurant">
+        <property name="hotDrink">
+            <bean class="main.Tea">
+                <property name="expressTea" >
+                    <bean class="main.ExpressTea">
+                        <property name="teaType" value="Blacktea"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!--Question 5-->
+    <bean name="complexBean" class="main.Complex">
+        <property name="list">
+            <list>
+                <value>ankur</value>
+                <value>is</value>
+                <value>good</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="1" value="ankur"/>
+                <entry key="2" value="works in"/>
+                <entry key="3" value="to the new"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>hello</value>
+                <value>good evening</value>
+            </set>
+        </property>
+    </bean>
+
+    <!--Question 6-->
+    <bean name="restaurantByName" class="main.Restaurant" autowire="byName"/>
+
+    <bean name="restaurantByConstructor" class="main.Restaurant" autowire="constructor"/>
+
+</beans>
